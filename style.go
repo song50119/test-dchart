@@ -24,16 +24,16 @@ type BoardStyle struct {
 
 func (board BoardStyle) Layout(gtx layout.Context) layout.Dimensions {
 	return layout.Flex{}.Layout(gtx,
-		// layout.Flexed(.5, func(gtx layout.Context) layout.Dimensions {
-		// 	return layout.Stack{}.Layout(gtx,
-		// 		layout.Stacked(func(gtx layout.Context) layout.Dimensions {
-		// 			return board.layoutFilled(gtx, false)
-		// 		}),
-		// 		layout.Stacked(func(gtx layout.Context) layout.Dimensions {
-		// 			return board.layoutStroke(gtx, false)
-		// 		}),
-		// 	)
-		// }),
+		layout.Flexed(.5, func(gtx layout.Context) layout.Dimensions {
+			return layout.Stack{}.Layout(gtx,
+				layout.Stacked(func(gtx layout.Context) layout.Dimensions {
+					return board.layoutFilled(gtx, false)
+				}),
+				layout.Stacked(func(gtx layout.Context) layout.Dimensions {
+					return board.layoutStroke(gtx, false)
+				}),
+			)
+		}),
 		layout.Flexed(.5, func(gtx layout.Context) layout.Dimensions {
 			return layout.Stack{}.Layout(gtx,
 				layout.Stacked(func(gtx layout.Context) layout.Dimensions {
