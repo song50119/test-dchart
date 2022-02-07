@@ -114,10 +114,10 @@ func (board BoardStyle) layoutStroke(gtx layout.Context, isSell bool) layout.Dim
 	// 	stroke.Close()
 	// }
 
-	clip.Stroke{
+	defer clip.Stroke{
 		Path:  stroke.End(),
 		Width: 1,
-	}.Op().Push(gtx.Ops)
+	}.Op().Push(gtx.Ops).Pop()
 
 	var color color.NRGBA
 	if isSell {
@@ -218,7 +218,7 @@ func (board BoardStyle) layoutFilled(gtx layout.Context, isSell bool) layout.Dim
 	// 	}
 	// }
 
-	clip.Outline{Path: filled.End()}.Op().Push(gtx.Ops)
+	defer clip.Outline{Path: filled.End()}.Op().Push(gtx.Ops).Pop()
 	paint.ColorOp{Color: color}.Add(gtx.Ops)
 	paint.PaintOp{}.Add(gtx.Ops)
 
